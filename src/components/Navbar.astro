@@ -1,0 +1,225 @@
+---
+interface Button {
+    text: string;
+    link: string;
+}
+
+interface Props {
+    bannerTitle: string;
+    bannerSubtitle: string;
+    bannerButtons: Button[];
+}
+
+const { bannerTitle, bannerButtons, bannerSubtitle } = Astro.props;
+import "../../public/css/navbarStyle.css";
+---
+
+<header class="home">
+    <section class="contenedor-menu home-menu-logo">
+        <a href="index.html">
+            <img src="../../public/img/logo.png" alt="Logo" class="logo" />
+        </a>
+        <nav>
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </section>
+
+    <!-- Pop-up del Menú -->
+    <div id="menu-popup" class="menu-popup">
+        <div class="menu-content index">
+            <div class="Contenedor-popup">
+                <a href="home"
+                    ><img
+                        src="../../public/img/logo.png"
+                        alt="Logo"
+                        class="logo"
+                    /></a
+                >
+                <button class="close-button">&times;</button>
+            </div>
+            <ul class="menu-activo">
+                <div class="progress-bar-fijo"></div>
+                <div class="progress-bar"></div>
+                <li>
+                    <a href="/html/index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="/html/sintomas.html">Síntomas</a>
+                </li>
+                <li>
+                    <a href="#"
+                        >Causas <i class="fa-solid fa-chevron-down"></i></a
+                    >
+                    <ul class="submenu">
+                        <li
+                            class="color-b"
+                            data-image="../../public/img/bacterias.png"
+                        >
+                            <a href="/html/meningitis-bacteriana.html"
+                                >Bacteriana</a
+                            >
+                        </li>
+                        <li
+                            class="color-b"
+                            data-image="../../public/img/meningitis-por-virus.png"
+                        >
+                            <a href="/html/meningitis-por-virus.html">Viral</a>
+                        </li>
+                        <li
+                            class="color-b"
+                            data-image="../../public/img/hongos10.png"
+                        >
+                            <a href="/html/meningitis-por-hongos.html">Hongos</a
+                            >
+                        </li>
+                        <li
+                            class="color-b"
+                            data-image="../../public/img/meningitis-por-parasito.png"
+                        >
+                            <a href="/html/meningitis-por-parasitos.html"
+                                >Parásitos</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/html/vacunas.html">Vacunación</a>
+                </li>
+            </ul>
+
+            <div class="image-container">
+                <img src="" alt="Descripción de la imagen" id="menu-image" />
+            </div>
+        </div>
+    </div>
+    <section class="banner" id="index__banner">
+        <div class="banner-content medium width-medium botones">
+            <h1>{bannerTitle}</h1>
+            <p>{bannerSubtitle}</p>
+            <div class="buttons">
+                {
+                    bannerButtons?.map((button) => (
+                        <a href={button.link}>
+                            <button>{button.text}</button>
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+</header>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".menu-toggle").addEventListener("click", () => {
+            document.querySelector(".menu").classList.toggle("show");
+        });
+
+        const menuToggle = document.querySelector(".menu-toggle");
+        const menuPopup = document.getElementById("menu-popup");
+        const closeButton = document.querySelector(".close-button");
+
+        menuToggle.addEventListener("click", function () {
+            if (menuPopup.classList.contains("hidden")) {
+                menuPopup.classList.remove("hidden");
+                menuPopup.style.display = "block";
+            }
+            menuPopup.style.display = "block";
+        });
+
+        closeButton.addEventListener("click", function () {
+            menuPopup.classList.add("hidden");
+            setTimeout(function () {
+                menuPopup.style.display = "none";
+            }, 500);
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === menuPopup) {
+                menuPopup.classList.add("hidden");
+                setTimeout(function () {
+                    menuPopup.style.display = "none";
+                }, 500);
+            }
+        });
+
+        // Manejo de submenús y barra de progreso
+        const menuItems = document.querySelectorAll(".menu-activo > li");
+        const progressBar = document.querySelector(".progress-bar");
+        const submenuItems = document.querySelectorAll(".submenu li");
+        const imageContainer = document.querySelector(".image-container");
+        const menuImage = document.getElementById("menu-image");
+        const arrowDown = document.querySelector(".fa-chevron-down");
+        menuItems.forEach((item) => {
+            item.addEventListener("mouseenter", function () {
+                const submenu = this.querySelector(".submenu");
+                if (submenu) {
+                    submenu.style.display = "flex";
+                }
+                const itemRect = item.getBoundingClientRect();
+                const containerRect =
+                    item.parentElement.getBoundingClientRect();
+                progressBar.style.width = `${itemRect.width}px`;
+                progressBar.style.left = `${itemRect.left - containerRect.left}px`;
+            });
+
+            item.addEventListener("mouseleave", function () {
+                const submenu = this.querySelector(".submenu");
+                if (submenu) {
+                    submenu.style.display = "none";
+                }
+                progressBar.style.width = "0";
+            });
+        });
+
+        submenuItems.forEach((item) => {
+            item.addEventListener("mouseenter", function () {
+                const imageUrl = this.getAttribute("data-image");
+                if (imageUrl) {
+                    menuImage.src = imageUrl;
+                    imageContainer.style.display = "block";
+                }
+            });
+
+            item.addEventListener("mouseleave", function () {
+                imageContainer.style.display = "none";
+            });
+        });
+        let descargarPDF = document.getElementById("descargar");
+        descargarPDF.addEventListener("click", function () {
+            const link = document.createElement("a");
+            link.href = "../wp-content/uploads/2024/02/CNdV2024_H32x24lunN.pdf";
+            link.download = "CNdV2024_H32x24lunN.pdf";
+            link.click();
+            document.body.removeChild(link);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Toggle menu on mobile
+        const menuToggle = document.querySelector(".menu-toggle");
+        const menu = document.querySelector(".menu");
+        const closeButton = document.querySelector(".menu-close");
+
+        menuToggle.addEventListener("click", () => {
+            menu.classList.toggle("open");
+        });
+
+        closeButton.addEventListener("click", () => {
+            menu.classList.remove("open");
+        });
+
+        // Close the menu when clicking outside of it
+        window.addEventListener("click", function (event) {
+            if (
+                !menu.contains(event.target) &&
+                !menuToggle.contains(event.target)
+            ) {
+                menu.classList.remove("open");
+            }
+        });
+    });
+</script>
+<style>
+
+</style>

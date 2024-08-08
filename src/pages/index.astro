@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="Welcome to Astro." boostrap>
+	<Navbar 
+		bannerTitle="¿Cuánto sabés sobre la Meningitis?"
+		bannerSubtitle=""
+		bannerButtons={[
+			{
+				text: "¿Qué es?",
+				link: "#que-es"
+			},
+			{
+				text: "Síntomas",
+				link: "#sintomas"
+			},
+			{
+				text: "Prevención",
+				link: "/html/vacunas.html"
+			},
+			{
+				text: "Secuelas",
+				link: "/html/meningitis-bacteriana.html#secuelas"
+			}
+		]}
+	></Navbar>
+</Layout>
+
+<style>
+
+</style>

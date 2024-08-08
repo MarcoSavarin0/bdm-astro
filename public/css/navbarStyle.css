@@ -1,0 +1,337 @@
+.contenedor-menu {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 5% 5% 5% 5%;
+    background-color: #fff;
+    height: 75vh;
+}
+
+.home {
+    background-image: url(../../public/img/Banner-BDM\ 1.png);
+    background-size: cover;
+    background-position: center;
+    height: 60rem;
+}
+
+.logo {
+    height: 78%;
+}
+
+nav {
+    position: relative;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+
+    cursor: pointer;
+    font-size: 37px;
+    color: white;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    display: none;
+}
+
+.menu li {
+    margin: 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+section.contenedor-menu.tipos-menu {
+    margin: 0px;
+}
+
+section.contenedor-menu.meningitis-menu {
+    margin: 0px;
+}
+img#responsive-img {
+    display: none;
+}
+section.contenedor-menu.home-menu-logo {
+    width: auto;
+}
+.menu-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    transform: translateY(-100%);
+    animation:
+        slideIn 0.5s forwards,
+        negroBlock 0.5s forwards;
+}
+
+.menu-popup.hidden {
+    animation: slideOut 0.5s forwards;
+}
+.menu-content {
+    position: relative;
+    max-width: 100%;
+    background-color: white;
+    padding: 50px;
+    height: 65vh;
+}
+.menu-content.index {
+    height: 45.2rem;
+}
+
+.menu-activo {
+    display: flex;
+    list-style: none;
+    width: 100%;
+    gap: 100px;
+    padding: 0px;
+    margin-top: 50px;
+}
+
+/* sub menu activo*/
+.menu-activo {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 100px;
+    position: relative;
+    /* Necesario para el posicionamiento absoluto de los elementos hijos */
+}
+
+.menu-activo > li {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    gap: 10px;
+    padding: 1.1rem 0px 0px 0px;
+    z-index: 10;
+    list-style: none;
+}
+
+.submenu li {
+    padding: 10px 20px;
+
+    white-space: nowrap;
+}
+
+.submenu a {
+    text-decoration: none;
+    color: #000;
+}
+
+.menu-activo li.color-b a {
+    color: #4a4a4a;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+ul.submenu {
+    flex-direction: column;
+}
+
+.menu-activo > li:hover .submenu {
+    display: block;
+    height: 200px;
+}
+
+.image-container {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    display: none;
+    z-index: 5;
+    border-radius: 20px;
+    right: 4%;
+}
+
+.image-container img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.menu-activo {
+    display: flex;
+    position: relative;
+    list-style: none;
+    padding: 50px 0px 50px 0px;
+    margin: 0;
+}
+
+.menu-activo > li {
+    padding: 0 20px;
+    position: relative;
+}
+
+.menu-activo > li a {
+    color: #939393;
+    text-decoration: none;
+    color: #939393;
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.menu-activo > li a:hover {
+    color: #7666ea;
+}
+
+.progress-bar-fijo {
+    width: 10px;
+    color: #939393;
+}
+
+.progress-bar {
+    margin: 30px 0px 33px 0px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: #7666ea;
+    width: 0;
+    transition:
+        width 0.3s ease,
+        left 0.3s ease;
+}
+
+.progress-bar-fijo {
+    background-color: #939393;
+    color: #939393;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    margin-top: 38px;
+}
+
+/* Botón de cerrar */
+.close-button {
+    border: 0px;
+    background: none;
+    font-size: 3.5em;
+    cursor: pointer;
+    color: black;
+}
+
+/* Animación del pop-up */
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes negroBlock {
+    0% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    25% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    50% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    75% {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+
+@media (max-width: 768px) {
+.menu {
+    display: none;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-toggle {
+    display: block;
+}
+
+.menu.show {
+    display: flex;
+}
+
+.banner-content {
+    padding: 0px;
+}
+
+h1 {
+    font-size: 2em;
+}
+}
+
+/* <!-- ------------------------------ menu ------------------------------> */
+.menu-content {
+    height: 77vh;
+}
+
+.contenedor-menu.hongos-menu {
+    margin: 44px 0px 0px 0px;
+}
+
+.contenedor-menu {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 44px 32px 0px 32px;
+}
+
+section.contenedor-menu.home-menu-logo {
+    width: auto;
+}
+
+
